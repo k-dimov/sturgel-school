@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom'
 import { useState } from "react";
 import { firestore } from "./config/firebase";
 import {addDoc, collection} from '@firebase/firestore'
+
 import Header from './components/header/Header'
 import Register from './components/register/Register';
 import Login from './components/login/Login';
@@ -11,15 +12,10 @@ function App() {
 
 	const ref = collection(firestore, 'messages');
 
-	const submitHandler = (e) => {
-		e.preventDefault();
+	const loginSubmitHandler = () => {
 
-		addDoc(ref, {message})
 	}
 
-	const changeHandler = (e) => {
-		setMessage(e.target.value);
-	}
     return (
 	<>
 		<Header />
