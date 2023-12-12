@@ -2,3 +2,8 @@
     display: flex !important;
     justify-content: center;
 }
+
+
+.slide {
+    max-width: 90vw;
+}

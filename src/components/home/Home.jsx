@@ -3,16 +3,42 @@ import styles from "./Home.module.css"
 
 function Home() {
     return (
-        <Carousel>
-            <Carousel.Item className={styles.imgContainer}>
-                    <img src="/public/6455.jpg" alt="school-render" />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                        Nulla vitae elit libero, a pharetra augue mollis
-                        interdum.
-                    </p>
-                </Carousel.Caption>
+        <Carousel className={styles.carousel} slide={false}>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/drone-shot.jpg" alt="school-render" className={styles.slide}/>
+                </div>
+            </Carousel.Item>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/entrance-render.jpg" alt="school-render" className={styles.slide}/>
+                </div>
+            </Carousel.Item>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/decking-render.jpg" alt="school-render" className={styles.slide}/>
+                </div>
+            </Carousel.Item>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/library-render.jpg" alt="school-render" className={styles.slide}/>
+                </div>
+            </Carousel.Item>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/dormitory-render.jpg" alt="school-render" className={styles.slide}/>
+                </div>
+            </Carousel.Item>
+            <Carousel.Item >
+                <div className={styles.imgContainer}>
+
+                    <img src="/public/lounge-area.jpg" alt="school-render" className={styles.slide}/>
+                </div>
             </Carousel.Item>
         </Carousel>
     );
