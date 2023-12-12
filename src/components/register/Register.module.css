@@ -1,3 +1,13 @@
+.button {
+    background-color: #4d4a63;
+    border-color: #4d4a63;
+}
+
+.button:hover {
+    background-color: #7D6991;
+    border-color: #7D6991;
+}
+
 .formContainer {
     margin: 3em;
     display: flex;

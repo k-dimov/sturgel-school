@@ -19,12 +19,12 @@ const initialState = {
 function Register({submitHandler}) {
 
     const {formData, onChange, onSubmit} = useForm(submitHandler, initialState);
-    console.log(formData)
+
     return (
         <div className={styles.formContainer}>
             <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Имейл</Form.Label>
                     <Form.Control
                         type="email"
                         name={KEYS.Email}
@@ -36,7 +36,7 @@ function Register({submitHandler}) {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Парола</Form.Label>
                     <Form.Control
                         type="password"
                         name={KEYS.Pass}
@@ -47,7 +47,7 @@ function Register({submitHandler}) {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Repeat Password</Form.Label>
+                    <Form.Label>Потвърждаване</Form.Label>
                     <Form.Control
                         type="password"
                         name={KEYS.RePass}
@@ -57,8 +57,8 @@ function Register({submitHandler}) {
                         value={formData[KEYS.RePass]}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="primary" type="submit" className={styles.button}>
+                    Създай профил
                 </Button>
             </Form>
         </div>

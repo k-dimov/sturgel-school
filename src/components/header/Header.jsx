@@ -33,11 +33,12 @@ function Header() {
                                 Separated link
                             </NavDropdown.Item>
                         </NavDropdown>
+                        
                         <Nav.Link as={Link} to="/login">
-                            Login
+                            Влез
                         </Nav.Link>
                         <Nav.Link as={Link} to="/register">
-                            Register
+                            Регистрирай се
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

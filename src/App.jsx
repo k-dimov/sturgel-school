@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import AuthContext from "./contexts/authContext";
@@ -40,6 +41,8 @@ function App() {
                     element={<Login submitHandler={loginSubmitHandler} />}
                 />
             </Routes>
+			
+			<Footer />
         </AuthContext.Provider>
     );
 }

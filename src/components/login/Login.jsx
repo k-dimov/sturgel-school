@@ -23,7 +23,7 @@ function Login({submitHandler}) {
         <div className={styles.formContainer}>
             <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Имейл</Form.Label>
                     <Form.Control
                         name={KEYS.Email}
                         type="email"
@@ -35,7 +35,7 @@ function Login({submitHandler}) {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Парола</Form.Label>
                     <Form.Control
                         name={KEYS.Pass}
                         type="password"
@@ -45,8 +45,8 @@ function Login({submitHandler}) {
                         value={formData[KEYS.Pass]}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="primary" type="submit" className={styles.button}>
+                    Влез
                 </Button>
             </Form>
         </div>
