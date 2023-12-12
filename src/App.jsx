@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "./config/firebase";
 import {
@@ -43,7 +43,8 @@ function App() {
                     path="/login"
                     element={<Login submitHandler={loginSubmitHandler} />}
                 />
-				<Route path='/home' element={<Home/>} />
+				<Route path='/' element={<Home/>} />
+				<Route path='/home' element={<Navigate to='/'/>}/>
             </Routes>
 
 			<Footer />
