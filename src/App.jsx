@@ -15,6 +15,8 @@ import Login from "./components/login/Login";
 import AuthContext from "./contexts/authContext";
 import Home from "./components/home/Home";
 
+import styles from "./App.module.css"
+
 function App() {
 	const [authToken, setAuthToken] = useState({});
 
@@ -31,24 +33,27 @@ function App() {
     };
 
     return (
-        <AuthContext.Provider value={authToken}>
-            <Header />
+		<AuthContext.Provider value={authToken}>
+			<div className={styles.container}>
 
-            <Routes>
-                <Route
-                    path="/register"
-                    element={<Register submitHandler={registerSubmitHandler} />}
-                />
-                <Route
-                    path="/login"
-                    element={<Login submitHandler={loginSubmitHandler} />}
-                />
-				<Route path='/' element={<Home/>} />
-				<Route path='/home' element={<Navigate to='/'/>}/>
-            </Routes>
+				<Header />
 
-			<Footer />
-        </AuthContext.Provider>
+				<Routes>
+					<Route
+						path="/register"
+						element={<Register submitHandler={registerSubmitHandler} />}
+					/>
+					<Route
+						path="/login"
+						element={<Login submitHandler={loginSubmitHandler} />}
+					/>
+					<Route path='/' element={<Home/>} />
+					<Route path='/home' element={<Navigate to='/'/>}/>
+				</Routes>
+
+				<Footer />
+			</div>
+		</AuthContext.Provider>
     );
 }
 
