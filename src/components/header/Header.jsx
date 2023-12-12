@@ -10,13 +10,13 @@ function Header() {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container className={styles.navContainer}>
-                <Navbar.Brand href="#home">
-                    <img src="/public/ela-logo.png" alt="ela" />
+                <Navbar.Brand as={Link} to="/home">
+                    <img src="public/logo-black.png" alt="ela" className={styles.logo}/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className={styles.basicNavbar}>
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">

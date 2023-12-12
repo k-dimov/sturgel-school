@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "./config/firebase";
@@ -11,6 +13,7 @@ import Footer from "./components/footer/Footer";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import AuthContext from "./contexts/authContext";
+import Home from "./components/home/Home";
 
 function App() {
 	const [authToken, setAuthToken] = useState({});
@@ -40,8 +43,9 @@ function App() {
                     path="/login"
                     element={<Login submitHandler={loginSubmitHandler} />}
                 />
+				<Route path='/home' element={<Home/>} />
             </Routes>
-			
+
 			<Footer />
         </AuthContext.Provider>
     );
