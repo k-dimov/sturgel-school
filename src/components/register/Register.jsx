@@ -54,8 +54,8 @@ function Register({ setUser }) {
 
     const registerSubmitHandler = (formData) => {
         createUserWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((user) => {
-                setUser(user);
+            .then((response) => {
+                setUser(response.user);
                 navigate('/')
             })
             .catch((err) => setErrorsList([err.message]));

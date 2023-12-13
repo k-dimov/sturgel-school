@@ -34,8 +34,8 @@ function Login({ setUser }) {
 
     const loginSubmitHandler = (formData) => {
         signInWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((user) => {
-                setUser(user);
+            .then((response) => {
+                setUser(response.user);
                 navigate('/');
             })
             .catch((err) => {

@@ -41,9 +41,14 @@ function DonationModal({ handleClose }) {
             ...formData,
             [KEYS.Public]: formData[KEYS.Public] === "checked" ? true : false,
             [KEYS.UserId]: user.uid,
+            createdOn: new Date().toISOString(),
         };
-        console.log(formData)
-        // addDoc(docRef);
+        try{
+            addDoc(docRef, formData);
+            handleClose();
+        } catch(err){
+            console.log(err)
+        }
     };
 
     const { formData, onChange, onSubmit } = useForm(

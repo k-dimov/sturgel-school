@@ -11,7 +11,6 @@ function Donations() {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    const navigate = useNavigate()
     return (
         <>
             {showModal && <DonationModal handleClose={handleClose}/>}
