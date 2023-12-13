@@ -18,3 +18,11 @@
 .inputField {
     min-width: 30em;
 }
+
+.noError {
+    display: none;
+}
+
+.loginError {
+    color: red
+}

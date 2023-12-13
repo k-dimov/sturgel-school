@@ -2,24 +2,38 @@ import { useState } from "react";
 
 function useForm(submitHandler, initialValues, validate) {
     const [formData, setFormData] = useState(initialValues);
+    const [errors, setErrors] = useState(initialValues);
 
     const onChange = (e) => {
         setFormData((state) => ({
             ...state,
             [e.target.name]: e.target.value,
         }));
+        
+    };
+
+    const onBlur = (e) => {
+        setFormData(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }))
+        setErrors(validate(formData));
+        console.log(formData)
+        console.log(errors)
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
         submitHandler(formData);
     };
+
 
     return {
         formData,
         onChange,
         onSubmit,
+        onBlur,
+        errors
     };
 }
 

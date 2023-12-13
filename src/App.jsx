@@ -2,11 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { auth } from "./config/firebase";
-import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-} from "firebase/auth";
+
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -19,22 +15,10 @@ import styles from "./App.module.css"
 import Donations from './components/donations/Donations';
 
 function App() {
-	const [authToken, setAuthToken] = useState({});
-
-    const loginSubmitHandler = (formData) => {
-        signInWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((token) => setAuthToken(token.user))
-            .catch((err) => console.log(err.message));
-    };
-
-    const registerSubmitHandler = (formData) => {
-        createUserWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((token) => setAuthToken(token.user))
-            .catch((err) => console.log(err.message));
-    };
+	const [user, setUser] = useState({});
 
     return (
-		<AuthContext.Provider value={authToken}>
+		<AuthContext.Provider value={user}>
 			<div className={styles.container}>
 
 				<Header />
@@ -42,11 +26,11 @@ function App() {
 				<Routes>
 					<Route
 						path="/register"
-						element={<Register submitHandler={registerSubmitHandler} />}
+						element={<Register setUser={setUser} />}
 					/>
 					<Route
 						path="/login"
-						element={<Login submitHandler={loginSubmitHandler} />}
+						element={<Login setUser={setUser} />}
 					/>
 					<Route path='/' element={<Home/>} />
 					<Route path='/home' element={<Navigate to='/'/>}/>

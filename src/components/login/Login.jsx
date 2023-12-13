@@ -3,21 +3,53 @@ import Form from "react-bootstrap/Form";
 
 import styles from "./Login.module.css";
 import useForm from "../../hooks/useForm";
+import { useState } from "react";
 
+import { auth } from "../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const KEYS = {
-    Email: 'email',
-    Pass: 'password',
-}
+    Email: "email",
+    Pass: "password",
+};
 
 const initialState = {
-    [KEYS.Email]: '',
-    [KEYS.Pass]: '',
-}
+    [KEYS.Email]: "",
+    [KEYS.Pass]: "",
+};
 
-function Login({submitHandler}) {
+const validate = (data) => {
+    const emailPattern = new RegExp("^[w-.]+@([w-]+.)+[w-]{2,4}$", "g");
+    const errorMessages = {};
 
-    const {formData, onChange, onSubmit} = useForm(submitHandler, initialState);
+    if (!emailPattern.test(data[KEYS.Email])) {
+        errorMessages[KEYS.Email] = "Невалиден имейл";
+    }
+};
+
+function Login({ setUser }) {
+
+    const navigate = useNavigate()
+
+    const loginSubmitHandler = (formData) => {
+        signInWithEmailAndPassword(auth, formData.email, formData.password)
+            .then((user) => {
+                setUser(user);
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log(err)
+                setError(true)
+            });
+    };
+
+    const [error, setError] = useState(false);
+    const { formData, onChange, onSubmit } = useForm(
+        loginSubmitHandler,
+        initialState,
+        validate
+    );
 
     return (
         <div className={styles.formContainer}>
@@ -45,7 +77,14 @@ function Login({submitHandler}) {
                         value={formData[KEYS.Pass]}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit" className={styles.button}>
+                <p className={error ? styles.loginError : styles.noError}>
+                    Неправилен имейл или парола
+                </p>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className={styles.button}
+                >
                     Влез
                 </Button>
             </Form>

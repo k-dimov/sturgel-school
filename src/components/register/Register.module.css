@@ -17,3 +17,10 @@
 .inputField {
     min-width: 30em;
 }
+
+.error {
+    color:red;
+}
+.noError {
+    display: none;
+}
