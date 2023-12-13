@@ -1,19 +1,34 @@
 import { Table, Button } from "react-bootstrap";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Donations.module.css";
-import { useNavigate } from "react-router-dom";
 import DonationModal from "./DonationModal";
+
+import { firestore } from "../../config/firebase";
+import {collection, getDocs} from "@firebase/firestore"
 
 function Donations() {
     const [showModal, setShowModal] = useState(false);
+    const [donations, setDonations] = useState([]);
+
+    useEffect(() => {
+        getDocs(collection(firestore, 'donations'))
+            .then(data => {
+                const donationsList = [];
+                data.forEach(doc => {
+                    donationsList.push({id: doc.id, data:doc.data()})
+                });
+                setDonations(donationsList);
+                console.log(donations)
+            })
+            .catch(err => console.log(err));
+    }, []);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
     return (
         <>
-            {showModal && <DonationModal handleClose={handleClose}/>}
+            {showModal && <DonationModal handleClose={handleClose} setDonations={setDonations}/>}
             <div className={styles.infoContainer}>
                 <h3 className={styles.heading}>Как мога да се включа?</h3>
                 <p className={styles.paragraph}>
