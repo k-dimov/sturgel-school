@@ -39,7 +39,7 @@ function Donations() {
                     да го направите чрез бутона по-долу. Благодарим!
                 </p>
 
-                <Button variant="primary" size="lg" className={styles.bigButton} onClick={handleShow}>
+                <Button variant="primary" size="lg" className={`${styles.bigButton} ${styles.button}`} onClick={handleShow}>
                     Дари!
                 </Button>
             </div>

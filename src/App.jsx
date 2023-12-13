@@ -17,7 +17,6 @@ import Home from "./components/home/Home";
 
 import styles from "./App.module.css"
 import Donations from './components/donations/Donations';
-import DonationModal from './components/donations/DonationModal';
 
 function App() {
 	const [authToken, setAuthToken] = useState({});

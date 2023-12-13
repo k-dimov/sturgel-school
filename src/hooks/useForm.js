@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useForm(submitHandler, initialValues) {
+function useForm(submitHandler, initialValues, validate) {
     const [formData, setFormData] = useState(initialValues);
 
     const onChange = (e) => {
@@ -12,7 +12,7 @@ function useForm(submitHandler, initialValues) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
+        console.log(formData)
         submitHandler(formData);
     };
 

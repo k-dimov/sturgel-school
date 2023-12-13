@@ -5,9 +5,20 @@ h3 {
     font-weight: 700;
 }
 
+.button {
+    background-color: #719c58;
+    border-color: #719c58;
+}
+
+.button:hover {
+    background-color: #496439;
+    border-color: #496439;
+}
+
 .tableContainer {
     display: flex;
     justify-content: center;
+    margin-bottom: 2em;
 }
 
 .table {
@@ -28,4 +39,10 @@ h3 {
 
 .bigButton {
     margin-bottom: 2em;
+}
+
+.donationInfo {
+    margin-left: 1em;
+    font-size: 14px;
+    color: rgb(71, 70, 70);
 }
