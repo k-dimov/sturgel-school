@@ -1,3 +1,10 @@
+.usernav {
+    display: flex;
+}
+
+.auth {
+    display: flex;
+}
 
 .logo {
     width: 150px;

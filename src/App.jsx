@@ -16,6 +16,8 @@ import AuthContext from "./contexts/authContext";
 import Home from "./components/home/Home";
 
 import styles from "./App.module.css"
+import Donations from './components/donations/Donations';
+import DonationModal from './components/donations/DonationModal';
 
 function App() {
 	const [authToken, setAuthToken] = useState({});
@@ -49,6 +51,7 @@ function App() {
 					/>
 					<Route path='/' element={<Home/>} />
 					<Route path='/home' element={<Navigate to='/'/>}/>
+					<Route path='/donations' element={<Donations/>}/>
 				</Routes>
 
 				<Footer />

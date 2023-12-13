@@ -1,8 +1,17 @@
 h3 {
     display: inline;
-    margin-top: 2em;
+    margin: 2em 0;
     font-size: 30px;
     font-weight: 700;
+}
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    width: 97%
 }
 
 .paragraph {
@@ -11,19 +20,12 @@ h3 {
     line-height: 1.7em;
 }
 
-
-.homeContainer {
+.infoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.imgContainer {
-    display: flex !important;
-    justify-content: center;
-}
-
-
-.slide {
-    max-width: 90vw;
+.bigButton {
+    margin-bottom: 2em;
 }
