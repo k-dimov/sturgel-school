@@ -41,13 +41,13 @@ function DonationModal({ handleClose, setDonations }) {
         console.log(formData)
         const donationData = {
             ...formData,
-            [KEYS.Public]: formData[KEYS.Public] === "checked" ? true : false,
+            [KEYS.Public]: formData[KEYS.Public],
             [KEYS.UserId]: user.uid,
             createdOn: new Date().toISOString(),
         };
         try{
             addDoc(docRef, donationData);
-            setDonations(state => [...state, {data: formData, id: user.uid}]);
+            setDonations(state => [...state, {data: donationData, id: user.uid}]);
             handleClose();
         } catch(err){
             console.log(err)
