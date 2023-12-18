@@ -9,6 +9,9 @@ import { collection, getDocs } from "@firebase/firestore";
 import DonationTableRow from "./DonationTableRow";
 import DonationInfoModal from "./DonationInfoModal";
 
+import AuthContext from "../../contexts/authContext";
+import { useContext } from "react";
+
 
 const showInfoState = {
     show: false,
@@ -19,6 +22,9 @@ function Donations() {
     const [showDonationModal, setShowDonationModal] = useState(false);
     const [showInfoModal, setShowInfoModal] = useState(showInfoState);
     const [donations, setDonations] = useState([]);
+
+    const user = useContext(AuthContext);
+
 
     useEffect(() => {
         getDocs(collection(firestore, "donations"))
@@ -87,9 +93,11 @@ function Donations() {
                     size="lg"
                     className={`${styles.bigButton} ${styles.button}`}
                     onClick={handleShowDonationModal}
+                    disabled={user.uid ? false : true}
                 >
                     Дари!
                 </Button>
+                {!user.uid && (<p className={styles.warning}>Влезте или се регистрирайте за да дарите</p>)}
             </div>
 
             <div className={styles.tableContainer}>

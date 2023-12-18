@@ -46,3 +46,7 @@ h3 {
     font-size: 14px;
     color: rgb(71, 70, 70);
 }
+
+.warning {
+    color: rgb(233, 41, 41);
+}
