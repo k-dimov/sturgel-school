@@ -18,7 +18,7 @@ const KEYS = {
 const initialState = {
     [KEYS.Name]: "",
     [KEYS.Donation]: "",
-    [KEYS.Public]: false,
+    [KEYS.Public]: '',
     [KEYS.Message]: "",
     [KEYS.UserId]: "",
 };
@@ -31,20 +31,23 @@ const validate = (data) => {
     }
 }
 
-function DonationModal({ handleClose }) {
+function DonationModal({ handleClose, setDonations }) {
     const user = useContext(AuthContext);
 
     const docRef = collection(firestore, "donations");
 
     const submitHandler = (formData) => {
-        formData = {
+
+        console.log(formData)
+        const donationData = {
             ...formData,
             [KEYS.Public]: formData[KEYS.Public] === "checked" ? true : false,
             [KEYS.UserId]: user.uid,
             createdOn: new Date().toISOString(),
         };
         try{
-            addDoc(docRef, formData);
+            addDoc(docRef, donationData);
+            setDonations(state => [...state, {data: formData, id: user.uid}]);
             handleClose();
         } catch(err){
             console.log(err)
@@ -99,7 +102,7 @@ function DonationModal({ handleClose }) {
                                 name="public"
                                 type={"checkbox"}
                                 id={`inline-checkbox-2`}
-                                value={formData[KEYS.public]}
+                                value={formData[KEYS.Public]}
                                 onChange={onChange}
                             />
                         </Form.Label>

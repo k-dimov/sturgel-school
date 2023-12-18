@@ -5,10 +5,19 @@ function useForm(submitHandler, initialValues, validate) {
     const [errors, setErrors] = useState(initialValues);
 
     const onChange = (e) => {
-        setFormData((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
+        if (e.target.type === 'checkbox') {
+            setFormData((state) => ({
+                ...state,
+                [e.target.name]: e.target.checked,
+            }));
+
+        } else {
+            setFormData((state) => ({
+                ...state,
+                [e.target.name]: e.target.value,
+            }));
+            
+        }
         
     };
 

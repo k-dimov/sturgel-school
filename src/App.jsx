@@ -16,7 +16,7 @@ import Donations from './components/donations/Donations';
 
 function App() {
 	const [user, setUser] = useState({});
-
+	
     return (
 		<AuthContext.Provider value={user}>
 			<div className={styles.container}>

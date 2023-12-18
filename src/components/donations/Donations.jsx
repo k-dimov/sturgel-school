@@ -2,33 +2,62 @@ import { Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import styles from "./Donations.module.css";
 import DonationModal from "./DonationModal";
+import { sortByDate } from "../../utils/dateUtils";
 
 import { firestore } from "../../config/firebase";
-import {collection, getDocs} from "@firebase/firestore"
+import { collection, getDocs } from "@firebase/firestore";
+import DonationTableRow from "./DonationTableRow";
+import DonationInfoModal from "./DonationInfoModal";
+
+
+const showInfoState = {
+    show: false,
+    details: {},
+}
 
 function Donations() {
-    const [showModal, setShowModal] = useState(false);
+    const [showDonationModal, setShowDonationModal] = useState(false);
+    const [showInfoModal, setShowInfoModal] = useState(showInfoState);
     const [donations, setDonations] = useState([]);
 
     useEffect(() => {
-        getDocs(collection(firestore, 'donations'))
-            .then(data => {
+        getDocs(collection(firestore, "donations"))
+            .then((data) => {
                 const donationsList = [];
-                data.forEach(doc => {
-                    donationsList.push({id: doc.id, data:doc.data()})
+                data.forEach((doc) => {
+                    donationsList.push({ id: doc.id, data: doc.data() });
                 });
                 setDonations(donationsList);
-                console.log(donations)
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     }, []);
 
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    const handleCloseDonationModal = () => setShowDonationModal(false);
+    const handleShowDonationModal = () => setShowDonationModal(true);
+
+    const handleCloseInfoModal = () => setShowInfoModal(state => ({...state, show: false}));
+
+    const findDetails = (id) => {
+        const details = donations.find(don => don.id === id);
+        setShowInfoModal({details, show: true});
+    }
 
     return (
         <>
-            {showModal && <DonationModal handleClose={handleClose} setDonations={setDonations}/>}
+            {showDonationModal && (
+                <DonationModal
+                    handleClose={handleCloseDonationModal}
+                    setDonations={setDonations}
+                />
+            )}
+
+            {showInfoModal.show && (
+                <DonationInfoModal 
+                    handleClose={handleCloseInfoModal}
+                    details={showInfoModal.details}
+                />
+            )}
+
             <div className={styles.infoContainer}>
                 <h3 className={styles.heading}>Как мога да се включа?</h3>
                 <p className={styles.paragraph}>
@@ -53,7 +82,12 @@ function Donations() {
                     да го направите чрез бутона по-долу. Благодарим!
                 </p>
 
-                <Button variant="primary" size="lg" className={`${styles.bigButton} ${styles.button}`} onClick={handleShow}>
+                <Button
+                    variant="primary"
+                    size="lg"
+                    className={`${styles.bigButton} ${styles.button}`}
+                    onClick={handleShowDonationModal}
+                >
                     Дари!
                 </Button>
             </div>
@@ -69,23 +103,15 @@ function Donations() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan={2}>Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {sortByDate(donations).map((donation) => (
+                            <DonationTableRow
+                                key={donation.id}
+                                {...donation.data}
+                                isPublic={donation.data.public}
+                                id={donation.id}
+                                findDetails={findDetails}
+                            />
+                        ))}
                     </tbody>
                 </Table>
             </div>

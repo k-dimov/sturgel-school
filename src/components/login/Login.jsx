@@ -20,31 +20,27 @@ const initialState = {
 };
 
 const validate = (data) => {
-    const emailPattern = new RegExp("^[w-.]+@([w-]+.)+[w-]{2,4}$", "g");
-    const errorMessages = {};
-
-    if (!emailPattern.test(data[KEYS.Email])) {
-        errorMessages[KEYS.Email] = "Невалиден имейл";
-    }
+    return;
 };
 
 function Login({ setUser }) {
 
+    const [error, setError] = useState(false);
+    
     const navigate = useNavigate()
-
+    
     const loginSubmitHandler = (formData) => {
         signInWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((response) => {
-                setUser(response.user);
-                navigate('/');
-            })
-            .catch((err) => {
-                console.log(err)
-                setError(true)
-            });
+        .then((response) => {
+            setUser(response.user);
+            navigate('/');
+        })
+        .catch((err) => {
+            console.log(err)
+            setError(true)
+        });
     };
-
-    const [error, setError] = useState(false);
+    
     const { formData, onChange, onSubmit } = useForm(
         loginSubmitHandler,
         initialState,
