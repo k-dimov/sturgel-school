@@ -16,7 +16,7 @@ function useForm(submitHandler, initialValues, validate) {
                 ...state,
                 [e.target.name]: e.target.value,
             }));
-            
+
         }
         
     };
@@ -26,9 +26,7 @@ function useForm(submitHandler, initialValues, validate) {
             ...state,
             [e.target.name]: e.target.value
         }))
-        setErrors(validate(formData));
-        console.log(formData)
-        console.log(errors)
+        setErrors(validate(formData, errors));
     };
 
     const onSubmit = (e) => {

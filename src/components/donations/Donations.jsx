@@ -11,16 +11,18 @@ import DonationInfoModal from "./DonationInfoModal";
 
 import AuthContext from "../../contexts/authContext";
 import { useContext } from "react";
+import DonationDeleteModal from "./DonationDeleteModal";
 
 
-const showInfoState = {
+const modalInitalState = {
     show: false,
     details: {},
 }
 
 function Donations() {
     const [showDonationModal, setShowDonationModal] = useState(false);
-    const [showInfoModal, setShowInfoModal] = useState(showInfoState);
+    const [showDeleteModal, setShowDeleteModal] = useState(modalInitalState);
+    const [showInfoModal, setShowInfoModal] = useState(modalInitalState);
     const [donations, setDonations] = useState([]);
 
     const user = useContext(AuthContext);
@@ -48,6 +50,12 @@ function Donations() {
         setShowInfoModal({details, show: true});
     }
 
+    const handleCloseDeleteModal = () => setShowDeleteModal(state => ({...state, show: false}));
+
+    const deleteDonation = (id) => {
+        setShowDeleteModal({id, show: true});
+    }
+
     return (
         <>
             {showDonationModal && (
@@ -61,6 +69,14 @@ function Donations() {
                 <DonationInfoModal 
                     handleClose={handleCloseInfoModal}
                     details={showInfoModal.details}
+                />
+            )}
+
+            {showDeleteModal.show && (
+                <DonationDeleteModal
+                    handleClose={handleCloseDeleteModal}
+                    id={showDeleteModal.id}
+                    setDonations={setDonations}
                 />
             )}
 
@@ -118,6 +134,7 @@ function Donations() {
                                 isPublic={donation.data.public}
                                 id={donation.id}
                                 findDetails={findDetails}
+                                deleteDonation={deleteDonation}
                             />
                         ))}
                     </tbody>

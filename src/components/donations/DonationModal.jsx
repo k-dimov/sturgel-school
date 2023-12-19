@@ -23,12 +23,16 @@ const initialState = {
     [KEYS.UserId]: "",
 };
 
-const validate = (data) => {
-    const errorMessages = {};
+const validate = (data, errors) => { 
+    const errorMessages = {...errors};
     
-    if (parseInt(data[KEYS.Donation]) != data[KEYS.Donation]) {
+    if (Number(data[KEYS.Donation]) !== data[KEYS.Donation] && data[KEYS.Donation] !== '') {
         errorMessages[KEYS.Donation] = "Неправилно въведена сума";
+    } else {
+        errorMessages[KEYS.Donation] = '';
     }
+
+    return errorMessages;
 }
 
 function DonationModal({ handleClose, setDonations }) {
@@ -54,7 +58,7 @@ function DonationModal({ handleClose, setDonations }) {
         }
     };
 
-    const { formData, onChange, onSubmit } = useForm(
+    const { formData, onChange, onSubmit, onBlur, errors } = useForm(
         submitHandler,
         initialState,
         validate
@@ -87,6 +91,7 @@ function DonationModal({ handleClose, setDonations }) {
                             name={KEYS.Donation}
                             value={formData[KEYS.Donation]}
                             onChange={onChange}
+                            onBlur={onBlur}
                         />
                         <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>

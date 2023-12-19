@@ -13,6 +13,7 @@ function DonationTableRow({
     isPublic,
     id,
     findDetails,
+    deleteDonation,
 }) {
 
     const currUserId = useContext(AuthContext).uid;
@@ -22,7 +23,11 @@ function DonationTableRow({
     const timeDifference = Math.floor((currTime - createdOnTime) / (60 * 1000));
 
     const handleInfoClick = () => {
-        findDetails(id)
+        findDetails(id);
+    };
+
+    const handleDeleteClick = () => {
+        deleteDonation(id);
     }
 
     return (
@@ -34,7 +39,9 @@ function DonationTableRow({
                 <td className={styles.buttons}>
                     {timeDifference <= 15 ? <Button variant="secondary">Промени</Button> : ''}
                     <Button variant="secondary" onClick={handleInfoClick}>Детайли</Button>
-                    <Button variant="secondary" className={styles.delete}>Изтрий</Button>
+                    {/* {timeDifference <= 15 ? <Button variant="secondary" className={styles.delete}>Изтрий</Button> : ''} */}
+                    <Button variant="secondary" className={styles.delete} onClick={handleDeleteClick}>Изтрий</Button>
+                    
                 </td>
                 :
                 <td>

@@ -38,7 +38,7 @@ function DonationInfoModal({ handleClose, details }) {
                 </Table>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleClose}>Close</Button>
+                <Button onClick={handleClose}>Затвори</Button>
             </Modal.Footer>
         </Modal>
     );

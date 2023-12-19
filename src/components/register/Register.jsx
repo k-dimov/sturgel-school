@@ -21,9 +21,9 @@ const initialState = {
     [KEYS.RePass]: "",
 };
 
-function validate (data) {
+function validate (data, errors) {
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{1,4}$/g
-    const errorMessages = initialState;
+    const errorMessages = {...errors};
     
 
     if (!emailPattern.test(data[KEYS.Email])) {
@@ -49,16 +49,14 @@ function validate (data) {
 
 function Register({ setUser }) {
     const navigate = useNavigate()
-
-    const [errorsList, setErrorsList] = useState(initialState);
-
+    
     const registerSubmitHandler = (formData) => {
         createUserWithEmailAndPassword(auth, formData.email, formData.password)
             .then((response) => {
                 setUser(response.user);
                 navigate('/')
             })
-            .catch((err) => setErrorsList([err.message]));
+            .catch((err) => setErrors([err.message]));
     };
 
     const { formData, onChange, onSubmit, onBlur, errors } = useForm(
@@ -86,11 +84,11 @@ function Register({ setUser }) {
                 </Form.Group>
                 <p
                     className={
-                        errorsList[KEYS.Email] !== ""
+                        errors[KEYS.Email] !== ""
                             ? styles.error
                             : styles.noError
                     }
-                >{errorsList[KEYS.Email]}</p>
+                >{errors[KEYS.Email]}</p>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Парола</Form.Label>
                     <Form.Control
@@ -105,11 +103,11 @@ function Register({ setUser }) {
                 </Form.Group>
                 <p
                     className={
-                        errorsList[KEYS.Pass] !== ""
+                        errors[KEYS.Pass] !== ""
                             ? styles.error
                             : styles.noError
                     }
-                >{errorsList[KEYS.Pass]}</p>
+                >{errors[KEYS.Pass]}</p>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Потвърждаване</Form.Label>
                     <Form.Control
@@ -124,11 +122,11 @@ function Register({ setUser }) {
                 </Form.Group>
                 <p
                     className={
-                        errorsList[KEYS.RePass] !== ""
+                        errors[KEYS.RePass] !== ""
                             ? styles.error
                             : styles.noError
                     }
-                >{errorsList[KEYS.RePass]}</p>
+                >{errors[KEYS.RePass]}</p>
                 <Button
                     variant="primary"
                     type="submit"
